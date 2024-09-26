@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car store -_-</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+
+</head>
+
+<body>
+    <div class="d-flex p-3 bg-dark">
+        <a href="/"><div class="h5 p-2 mr-5 text-danger">Sale - baza danych</div></a>
+    </div>
+
+    <h2 class="display-3 mt-5 ml-5  pb-4">Dodaj salę</h2>
+
+    <!-- {{#if added}}
+    <div class="alert alert-success w-50 mx-auto position-relative top-0 start-50 translate-middle">Dodano salę o id = {{added}} added to database</div>
+    {{/if}} -->
+    
+    <form action="/addReq" method="post" class="m-4 position-absolute">
+    
+        <input type="text" name="name" id="name" class="mb-3"><label for="name" class="ml-2">Nazwa</label>
+        <br>
+        <input type="text" id="x_holder" class="x-holder" readonly placeholder="X" name="x" class="mt-5">
+        <input type="text" id="y_holder" class="y-holder" readonly placeholder="Y" name="y">
+        <input type="button" value="Pobierz współrzędne" name="coords" class="mt-1 mb-1" onclick=getLocation();>
+    
+        <br>
+    
+        <select name="building" class="mt-2">
+                <option value="main">Główny</option>
+                <option value="tech">Pracownie</option>
+                <option value="living">Internat</option>
+        </select>
+        <select name="floor">
+            <option value="-1">-1</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    
+        <br>
+        <input type="submit" value="Dodaj" id="submit_btn" class="btn btn-dark mt-5">
+    </form>
+
+
+
+
+
+    <script>
+        const xHolder = document.querySelector(".x-holder");
+        const yHolder = document.querySelector(".y-holder");
+    
+        function getLocation(){
+            xHolder.value = null;
+            yHolder.value = null;
+    
+    
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else console.log("Problem z API");
+            
+        }
+    
+        function showPosition(position){
+            xHolder.value = position.coords.longitude;
+            yHolder.value = position.coords.latitude;
+        }
+
+        // const classes_database = new Datastore({
+        //     filename: 'classes_database.db',
+        //     autoload: true
+        // });
+
+
+    </script>
+
+</body>
+
+</html>
